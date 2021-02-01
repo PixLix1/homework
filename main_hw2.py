@@ -12,11 +12,12 @@ print('add numbers 3rd check: ', sum_numbers(2, 4, 'abc', param_1=2))
 
 
 def read_int():
+    num = input('enter a number: ')
     try:
-        num = int(input('enter a number: '))
-        if type(num) == int:
-            return num
-    except:
+        int(num)
+        # if type(num) == int:
+        return num
+    except ValueError:
         return 0
 
 
@@ -24,26 +25,57 @@ print(read_int())
 
 
 def sum_with_for_loop(num):
-    even_list = []
-    odd_list = []
-    for i in range(num + 1):
-        if i % 2 == 0:
-            even_list.append(i)
-        else:
-            odd_list.append(i)
     sum_even = 0
     sum_odd = 0
     sum_ttl = 0
-    for i in even_list:
-        sum_even = sum_even + i
-    for i in odd_list:
-        sum_odd = sum_odd + i
     for i in range(num + 1):
         sum_ttl += i
-    return sum_ttl, sum_even, sum_odd
+        if i % 2 == 0:
+            sum_even += i
+        else:
+            sum_odd += i
+    return sum_ttl, sum_odd, sum_even
 
 
 print(sum_with_for_loop(2))
+
+# def sum_with_for_loop(num):
+#     even_list = []
+#     odd_list = []
+#     for i in range(num + 1):
+#         if i % 2 == 0:
+#             even_list.append(i)
+#         else:
+#             odd_list.append(i)
+#     sum_even = 0
+#     sum_odd = 0
+#     sum_ttl = 0
+#     for i in even_list:
+#         sum_even = sum_even + i
+#     for i in odd_list:
+#         sum_odd = sum_odd + i
+#     for i in range(num + 1):
+#         sum_ttl += i
+#     return sum_ttl, sum_even, sum_odd
+
+
+# def sum_recursive(num, even_list=None, odd_list=None):
+#     if even_list is None:
+#         even_list = []
+#     if odd_list is None:
+#         odd_list = []
+#     if num == 0:
+#         return 0
+#     if num % 2 == 0:
+#         even_list.append(num)
+#     else:
+#         odd_list.append(num)
+#         # return even_list, odd_list
+#         sum_ttl = num + sum_recursive(num - 1)
+#         return sum_ttl
+#
+#
+# print(sum_recursive(3))
 
 # def check_modulo(n):
 #     if n % 2 == 0:
