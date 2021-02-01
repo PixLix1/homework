@@ -1,26 +1,26 @@
-# def sum_numbers(*args, **kwargs):
-#     sum_final = 0
-#     for num in args:
-#         if type(num) == int or type(num) == float:
-#             sum_final += num
-#     return sum_final
+def sum_numbers(*args, **kwargs):
+    sum_final = 0
+    for num in args:
+        if type(num) == int or type(num) == float:
+            sum_final += num
+    return sum_final
 
 
-# print('add numbers 1st check: ', sum_numbers(1, 5, -3, 'abc', [12, 56, 'cad']))
-# print('add numbers 2nd check: ', sum_numbers())
-# print('add numbers 3rd check: ', sum_numbers(2, 4, 'abc', param_1=2))
+print('add numbers 1st check: ', sum_numbers(1, 5, -3, 'abc', [12, 56, 'cad']))
+print('add numbers 2nd check: ', sum_numbers())
+print('add numbers 3rd check: ', sum_numbers(2, 4, 'abc', param_1=2))
 
 
-# def read_int():
-#     try:
-#         num = int(input('enter a number: '))
-#         if type(num) == int:
-#             return num
-#     except:
-#         return 0
+def read_int():
+    try:
+        num = int(input('enter a number: '))
+        if type(num) == int:
+            return num
+    except:
+        return 0
 
 
-# print(read_int())
+print(read_int())
 
 
 def sum_with_for_loop(num):
