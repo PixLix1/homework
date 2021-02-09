@@ -137,9 +137,9 @@
 # keyboard_msg = input('Give me an input: ')
 # x = 'Parola este:\n\t"{}"'.format(keyboard_msg)  # format
 # print(x)
-# keyboard_msg = input('Give me an input: ')
-# x = f'Parola este:\n\t"{keyboard_msg}"'
-# print(x)
+keyboard_msg = input('Give me an input: ')
+x = f'Parola este:\n\t"{keyboard_msg}" la la la'
+print(x)
 # keyboard_msg = input('Give me an input: ')
 # my_number = int(input('Give me an input: '))
 # x = f'Parola este:\n\t"{keyboard_msg}"\n...{my_number} times.'
@@ -170,7 +170,7 @@
 # print(x)
 keyboard_msg = input('Give me an input: ')
 my_number = int(input('Give me an input: '))
-x = 'Parola {1} este {0}:\n\t"{message}"... \n{times} times'.format(
+x = 'Parola {1} este {0}:\n\t{message}... \n{times} times'.format(
     'afisata',
     'actuala',
     message=keyboard_msg,
