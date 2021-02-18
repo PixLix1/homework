@@ -14,9 +14,11 @@ except FileExistsError as err:
             os.remove(f)
 
 
-def create_json_file(directory, file_name, action_type, *list_name):
-    with open(directory + '/' + file_name, action_type) as json_file:
-        json_file.write(json.dumps(list_name))
+def create_json_file(directory, action_type, *list_name):
+    for x in list(list_name):
+        file_name = x[0] + '.json'
+        with open(directory + '/' + file_name, action_type) as json_file:
+            json_file.write(json.dumps(x[1]))
 
 
 header = []
@@ -41,18 +43,6 @@ with open('input.csv') as csv_file:
 
 car_data = [{key: value for key, value in zip(header, element)} for element in car_data]
 
-# DOES NOT CREATE LIST OF DICTS, INSTEAD DICTS ARE PLACED SIDE BY SIDE, WITHOUT COMMA
-# FILE NOT RECOGNIZABLE AS JSON FORMAT
-# slow_cars = [create_json_file(dir_path, 'slow_cars.json', 'a', x) for x in car_data if x['hp'] in range(0, 120)]
-# fast_cars = [create_json_file(dir_path, 'fast_cars.json', 'a', x) for x in car_data if x['hp'] in range(120, 180)]
-# sport_cars = [create_json_file(dir_path, 'sport_cars.json', 'a', x) for x in car_data if x['hp'] not in range(0, 179)]
-# cheap_cars = [create_json_file(dir_path, 'cheap_cars.json', 'a', x) for x in car_data if x['price'] in range(0, 1000)]
-# medium_cars = [create_json_file(dir_path, 'medium_cars.json', 'a', x) for x in car_data
-#                if x['price'] in range(999, 5000)]
-# expensive_cars = [create_json_file(dir_path, 'expensive_cars.json', 'w', x) for x in car_data
-#                   if x['price'] not in range(0, 4999)]
-
-
 slow_cars = [x for x in car_data if x['hp'] in range(0, 120)]
 fast_cars = [x for x in car_data if x['hp'] in range(120, 180)]
 sport_cars = [x for x in car_data if x['hp'] not in range(0, 180)]
@@ -60,28 +50,33 @@ cheap_cars = [x for x in car_data if x['price'] in range(0, 1000)]
 medium_cars = [x for x in car_data if x['price'] in range(1000, 5000)]
 expensive_cars = [x for x in car_data if x['price'] not in range(0, 5000)]
 
-create_json_file(output_dir_path, 'temp_file.json', 'w',
+create_json_file(output_dir_path, 'w',
                  ('slow_cars', slow_cars), ('fast_cars', fast_cars), ('sport_cars', sport_cars),
                  ('cheap_cars', cheap_cars), ('medium_cars', medium_cars), ('expensive_cars', expensive_cars))
-
-
-with open(output_dir_path + '/' + 'temp_file.json', 'r') as f:
-    test_data_exists = json.load(f)
-    for x, y in enumerate(test_data_exists):
-        file_nm = test_data_exists[x][0]
-        list_to_print = test_data_exists[x][1]
-        create_json_file(output_dir_path, file_nm + '.json', 'w', list_to_print)
-
-os.remove(output_dir_path + '/' + 'temp_file.json')
 
 brands = [car_data[x]['brand'] for x, y in enumerate(car_data)]
 brands = set(brands)
 for item in brands:
     temp_list = [car_data[x] for x, y in enumerate(car_data) if item in car_data[x]['brand']]
-    create_json_file(output_dir_path, item + '.json', 'w', temp_list)
+    create_json_file(output_dir_path, 'a', (item, temp_list))
+
 
 # # --------------------------------------------------------------------------------------------------------- old stuff
-#
+
+# DOES NOT CREATE LIST OF DICTS, INSTEAD DICTS ARE PLACED SIDE BY SIDE, WITHOUT COMMA
+# FILE NOT RECOGNIZABLE AS JSON FORMAT
+# IF CRITERIA NOT MET, FILE IS NOT GENERATED :(
+# slow_cars = [create_json_file(output_dir_path, 'slow_cars.json', 'a', x) for x in car_data if x['hp'] in range(0, 120)]
+# fast_cars = [create_json_file(output_dir_path, 'fast_cars.json', 'a', x) for x in car_data if x['hp'] in range(120, 180)]
+# sport_cars = [create_json_file(output_dir_path, 'sport_cars.json', 'a', x) for x in car_data if x['hp'] not in range(0, 179)]
+# cheap_cars = [create_json_file(output_dir_path, 'cheap_cars.json', 'a', x) for x in car_data if x['price'] in range(0, 1000)]
+# medium_cars = [create_json_file(output_dir_path, 'medium_cars.json', 'a', x) for x in car_data
+#                if x['price'] in range(999, 5000)]
+# expensive_cars = [create_json_file(output_dir_path, 'expensive_cars.json', 'a', x) for x in car_data
+#                   if x['price'] not in range(0, 4999)]
+
+
+
 # # with open(dir_path + '/' + 'temp_file.json') as f:
 # #     test_data_exists = json.load(f)
 #
@@ -205,5 +200,5 @@ for item in brands:
 # print(range(0, 1000))
 # print(range(999, 5000))
 # print(range(0, 4999))
-if 1000 in list(range(1000, 5000)):
-    print('True')
+# if 1000 in list(range(1000, 5000)):
+#     print('True')
