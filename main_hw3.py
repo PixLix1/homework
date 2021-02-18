@@ -26,7 +26,7 @@ def create_json_file(directory, action_type, *list_name):
     for x in list(list_name):
         file_name = x[0] + '.json'
         with open(directory + '/' + file_name, action_type) as json_file:
-            json_file.write(json.dumps(x[1]))
+            json_file.write(json.dumps(x[1], indent=4))
 
 
 header = []
