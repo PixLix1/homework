@@ -15,6 +15,14 @@ except FileExistsError as err:
 
 
 def create_json_file(directory, action_type, *list_name):
+    """
+    Generates json files based on multiple tuples as arguments
+    :param directory: location of the output files
+    :param action_type: write, append
+    :param list_name: tuple format: first element should be the output file's name,
+        second element should be the list which is to be printed in the newly generated file
+    :return: not applicable
+    """
     for x in list(list_name):
         file_name = x[0] + '.json'
         with open(directory + '/' + file_name, action_type) as json_file:
@@ -60,7 +68,6 @@ for item in brands:
     temp_list = [car_data[x] for x, y in enumerate(car_data) if item in car_data[x]['brand']]
     create_json_file(output_dir_path, 'a', (item, temp_list))
 
-
 # # --------------------------------------------------------------------------------------------------------- old stuff
 
 # DOES NOT CREATE LIST OF DICTS, INSTEAD DICTS ARE PLACED SIDE BY SIDE, WITHOUT COMMA
@@ -74,7 +81,6 @@ for item in brands:
 #                if x['price'] in range(999, 5000)]
 # expensive_cars = [create_json_file(output_dir_path, 'expensive_cars.json', 'a', x) for x in car_data
 #                   if x['price'] not in range(0, 4999)]
-
 
 
 # # with open(dir_path + '/' + 'temp_file.json') as f:
