@@ -23,9 +23,9 @@ def create_json_file(directory, action_type, *list_name):
         second element should be the list which is to be printed in the newly generated file
     :return: not applicable
     """
-    for x in list(list_name):
+    for x in list_name:
         file_name = x[0] + '.json'
-        with open(directory + '/' + file_name, action_type) as json_file:
+        with open(os.path.join(directory, file_name), action_type) as json_file:
             json_file.write(json.dumps(x[1], indent=4))
 
 
@@ -37,14 +37,15 @@ with open('input.csv') as csv_file:
     for index, data in enumerate(my_data):
         if index == 0:
             header = data
-            header.insert(index, 'id')
-            header = [x.strip(' ') for x in header]
+            header.insert(0, 'id')
+            header = [x.strip() for x in header]
         else:
-            data = [x.strip(' ') for x in data]
+            data = [x.strip() for x in data]
             for x, y in enumerate(data):
-                if data[x] == '' or data[x] == ' ':
-                    data.pop(x)
-                    data.insert(x, 0)
+                # if data[x] == '' or data[x] == ' ':
+                if not data[x]:  # data.pop(x)
+                    # data.insert(x, 0)
+                    data[x] = 0
             data[-2:] = [int(x) for x in data[-2:]]
             data.insert(0, index)
             car_data.append(data)
